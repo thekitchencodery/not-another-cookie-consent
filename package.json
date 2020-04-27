@@ -1,0 +1,52 @@
+{
+  "name": "not-another-cookie-consent",
+  "svelte": "src/index.js",
+  "module": "dist/index.min.mjs",
+  "main": "dist/index.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thekitchencodery/not-another-cookie-consent.git"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "prepublishOnly": "npm run build",
+    "start": "sirv public"
+  },
+  "devDependencies": {
+    "bulma": "^0.8.2",
+    "svelma": "^0.3.2",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-node-resolve": "^6.1.0",
+    "@rollup/plugin-replace": "^2.3.2",
+    "autoprefixer": "^9.7.6",
+    "postcss": "^7.0.27",
+    "postcss-load-config": "^2.1.0",
+    "rollup": "^1.20.0",
+    "rollup-plugin-livereload": "^1.2.0",
+    "rollup-plugin-postcss": "^3.1.1",
+    "rollup-plugin-svelte": "^5.2.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-pluginutils": "^2.8.2",
+    "sass": "^1.26.5",
+    "sirv-cli": "^0.4.5",
+    "svelte": "^3.0.0",
+    "svelte-preprocess": "^3.7.4"
+  },
+  "keywords": [
+    "svelte"
+  ],
+  "files": [
+    "src",
+    "dist"
+  ],
+  "description": "TODO",
+  "version": "1.0.0",
+  "dependencies": {},
+  "author": "Chris Laundy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thekitchencodery/not-another-cookie-consent/issues"
+  },
+  "homepage": "https://github.com/thekitchencodery/not-another-cookie-consent#readme"
+}

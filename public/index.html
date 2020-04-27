@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example Document</title>
+
+  <script src="bundle.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120379798-3"></script>
+
+  <!-- Create your own font awesome kit https://fontawesome.com/start -->
+  <script src="https://kit.fontawesome.com/a52ffc9147.js" crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <main class="wrapper">
+    <header class="header">
+      <div class="container">
+        <h1>Not Another Cookie Consent</h1>
+        <hr style="height:1px;border-width:0;color:gray;background-color:gray" />
+      </div>
+    </header>
+    <section class="container">
+      <div class="columns">
+
+        <div class="column  is-one-fifth" id="events">
+          <!-- Events appear here -->
+        </div>
+
+        <div class="column">
+          <div id="lipsum">
+            <p class="box">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sollicitudin elementum porta. Nunc
+              tincidunt semper lacus. Fusce at velit egestas, lacinia risus nec, tempor nibh. Donec molestie rutrum
+              scelerisque. Integer ut viverra odio. Nunc placerat tempus diam, sit amet mattis ante aliquam accumsan.
+              Vivamus nec dolor quis tellus faucibus tempor maximus id elit. Vestibulum sapien dolor, porttitor iaculis
+              magna eu, faucibus porttitor mauris. Donec non nunc porttitor turpis ullamcorper ornare non ac diam.
+              Nullam posuere arcu sit amet justo vehicula rutrum. Proin vitae urna sit amet risus commodo finibus at non
+              orci. Proin tristique augue arcu, in dapibus urna mollis semper. Nunc fermentum ex felis, nec vestibulum
+              massa scelerisque non. Nullam vitae varius metus.
+            </p>
+            <p class="box">
+              Suspendisse congue nibh at rutrum ultrices. Maecenas commodo blandit sem vel finibus. Pellentesque in
+              massa id sem lobortis ornare. Nam mi magna, vestibulum commodo ex eu, laoreet convallis nulla. Proin
+              mattis, sem id viverra pharetra, ipsum nisi interdum augue, non tincidunt dui sem eget nisl. Sed sem
+              tortor, sodales id nulla sit amet, varius facilisis velit. Praesent semper congue eros vel dapibus.
+              Praesent lacinia nunc enim, non pharetra diam porttitor et.
+            </p>
+            <p class="box">
+              Ut hendrerit nisi eu ligula fringilla scelerisque. Quisque nisl odio, posuere at sapien et, congue pretium
+              tortor. Integer ultrices consequat tellus, eget cursus neque placerat id. Proin congue pharetra orci,
+              porttitor lobortis nisl finibus tristique. Morbi ultrices felis in dolor ultricies placerat. Sed ac est
+              scelerisque, porttitor quam interdum, egestas tellus. Nunc ornare nulla a mauris dapibus vestibulum. Morbi
+              magna libero, pharetra quis imperdiet at, varius nec urna. Sed ligula ipsum, laoreet tristique quam non,
+              vulputate dapibus tellus. Suspendisse porttitor erat eu nibh ultricies feugiat. Vivamus euismod ligula
+              auctor erat pretium aliquam. Nullam lobortis, magna vitae pretium malesuada, magna tortor dapibus ante, ut
+              dignissim dui tellus sed massa. Cras eget dignissim justo. Morbi eu metus congue ex porttitor vestibulum.
+              Mauris varius vestibulum faucibus.
+            </p>
+            <p class="box">
+              Aliquam pretium eros accumsan venenatis molestie. Ut suscipit rhoncus fringilla. Ut et purus eu diam
+              commodo consequat. Aliquam hendrerit rutrum urna. Duis varius euismod nunc. Cras justo nulla, bibendum
+              aliquam justo ac, malesuada pellentesque eros. Quisque ipsum odio, condimentum in facilisis vel, tempor
+              vel felis.
+            </p>
+            <p class="box">
+              Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent tristique
+              est ac lectus iaculis blandit sed et leo. Mauris accumsan rhoncus augue vitae accumsan. Donec maximus,
+              magna eget viverra dignissim, ligula nisl dapibus sem, vitae semper diam lorem et ligula. Fusce imperdiet,
+              mi in elementum malesuada, mi lacus accumsan purus, iaculis venenatis purus velit vitae arcu. Phasellus
+              elementum pretium mi non mattis. Mauris nec dictum nibh. Phasellus fermentum tincidunt ex iaculis lacinia.
+              Proin ultricies ante vitae ex accumsan, eu dapibus tortor aliquet. Maecenas non placerat turpis, a
+              malesuada mi. Ut dignissim nisi at nulla commodo, sit amet lacinia lectus eleifend. Nulla blandit dolor
+              est, quis posuere neque sollicitudin eu. Sed a lorem at magna semper ultrices. Pellentesque habitant morbi
+              tristique senectus et netus et malesuada fames ac turpis egestas. Praesent aliquam nibh non tristique
+              elementum.
+            </p>
+            
+          </div>
+        </div>
+    </section>
+
+    <!-- The target for the side bar widget -->
+    <div id='cookieConsentWidget'></div>
+  </main>
+
+
+
+  <script>
+    var gtagId = 'UA-120379798-3';
+
+    // Disable tracking by default
+    window['ga-disable-' + gtagId] = true;
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    };
+    gtag('js', new Date());
+
+    /* connect the widgets to their target elements */
+    let naccWidget = new NotAnotherCookieConsent({
+      target: document.getElementById('cookieConsentWidget'),
+      props: {
+        cookieName: "notAnotherCookieConsent",
+        cookiePolicy: "https://www.termsfeed.com/blog/sample-cookies-policy-template/",
+        aboutCookies: "https://www.allaboutcookies.org/",
+        // one of: is-primary, is-info, is-link, is-success, is-warning, is-danger, is-black
+        theme: "is-danger",
+        banner: {
+          acceptButton: "!Accept!",
+          optionsButton: "!Options!",
+          headline: "!Banner Headline!",
+          strapline: "!Banner Strapline!"
+        },
+        optionPannel:{
+          title: "!Options Sidebar Title!",
+          preamble: "!This is the preamble where you describe cookies 'n' stuff!",
+          button: "!Save Button!",
+          aboutLabel: "!About Cookies!",
+          policyLabel: "!Cookie Policy Template!",
+          required: {
+            title: "!Required Cookies Title!",
+            label: "!Disabled switch!",
+            text: "!You can't turn these off!"
+          },
+          analytics: {
+            title: "!Analytics Cookies Title!",
+            label: "!Woking switch!",
+            text: "!These are optional but we'd like them switcvhed on!"
+          }
+        }
+      },
+    });
+
+    /* listen to events and update the DOM */
+
+    naccWidget.$on('nacc_event', (event) => {
+      let analytics = event.detail.analytic;
+      window['ga-disable-' + gtagId] = !analytics;
+      if (analytics) {
+        gtag('config', gtagId);
+      }
+
+      // Write event so we can see what's happening
+      let elem = document.createElement("blockquote");
+      elem.innerHTML = `${event.detail.text} (${analytics ? '👍' : '👎'})`;
+      let container = document.getElementById('events');
+      container.insertBefore(elem, container.firstChild);
+    });
+  </script>
+</body>
+
+</html>
