@@ -32,46 +32,51 @@ If you are looking for a general purpose cookie consent banner there are probabl
 That said if you really want to use this one feel free:
 
 1. You'll need a [fontawesome kit](https://fontawesome.com/start) and [Google Analytics](https://analytics.goolge.com)
-2. Add the scripts to your `<head>` tag;
-   <!-- Global site tag (gtag.js) - Google Analytics -->
+2. Add the scripts to your `<head>` tag:
+
+```html
+  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-000000000-0"></script>
 
   <!-- Create your own font awesome kit https://fontawesome.com/start -->
   <script src="https://kit.fontawesome.com/a123456789.js" crossorigin="anonymous"></script>
 
   <script src="https://cdn.jsdelivr.net/gh/thekitchencodery/not-another-cookie-consent/dist/index.min.js">
+```
 
 1. Put the following at the end of the `<body>` tag
 
-  <div id='cookieConsentWidget'></div>
+```javascript
+<div id='cookieConsentWidget'></div>
 
-  <script>
-    var gtagId = 'UA-000000000-0';
+<script>
+  var gtagId = 'UA-000000000-0';
 
-    // Disable tracking by default
-    window['ga-disable-' + gtagId] = true;
-    window.dataLayer = window.dataLayer || [];
+  // Disable tracking by default
+  window['ga-disable-' + gtagId] = true;
+  window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    };
-    gtag('js', new Date());
+  function gtag() {
+    dataLayer.push(arguments);
+  };
+  gtag('js', new Date());
 
-    let widget = new CookieConsent.nacc({
-      target: document.getElementById('cookieConsentWidget'),
-      props: {
+  let widget = new CookieConsent.nacc({
+    target: document.getElementById('cookieConsentWidget'),
+    props: {
 
-      }
-    });
+    }
+  });
 
-    widget.$on('nacc_event', (event) => {
-      let analytics = event.detail.analytic;
-      window['ga-disable-' + gtagId] = !analytics;
-      if (analytics) {
-        gtag('config', gtagId);
-      }
-    });
-    </script>
+  widget.$on('nacc_event', (event) => {
+    let analytics = event.detail.analytic;
+    window['ga-disable-' + gtagId] = !analytics;
+    if (analytics) {
+      gtag('config', gtagId);
+    }
+  });
+  </script>
+```
 
 There's an example in the `public` folder:
  
