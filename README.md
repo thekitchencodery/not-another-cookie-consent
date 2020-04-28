@@ -87,6 +87,7 @@ There's an example in the `public` folder:
 Edit the `public/index.html` to use your [Font Awesome Kit](https://fontawesome.com/start) 
 
 Then
+
     npm run dev
 
 And open your browser to http://localhost:5000 
