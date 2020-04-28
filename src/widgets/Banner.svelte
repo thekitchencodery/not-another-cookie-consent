@@ -1,29 +1,17 @@
 <script>
 	// Bit of a hack and paste job from svelma - Message.svelte
-	import { createEventDispatcher } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { Icon } from 'svelma';
+	import Icon from './Icon.svelte';
 
 	export let type = '';
 	export let active = true;
-	export let title = '';
-	export let showClose = true;
-	export let autoClose = false;
-	export let duration = 5000;
+
 	export let size = '';
-    export let icon = '';
-    export let iconPack = '';
+	export let icon = '';
+	export let iconPack = '';
 	export let iconSize = '';
 
 	let newIcon = '';
-
-	const dispatch = createEventDispatcher();
-
-	if (autoClose) {
-		setTimeout(() => {
-			close = true;
-		}, duration);
-	}
 
 	$: newIconSize = iconSize || size || 'is-large';
 
@@ -56,14 +44,24 @@
 	}
 </script>
 
-<style>
-    .banner{
-        position: fixed;
-        width: 100vw;
+<style lang="scss">
+	@import 'node_modules/bulma/sass/utilities/all';
+	@import 'node_modules/bulma/sass/components/message';
+	@import 'node_modules/bulma/sass/components/media';
+	@import 'node_modules/bulma/sass/elements/title';
+
+	.banner {
+		font-family: $family-primary;
+		color: $text;
+		font-size: 1em;
+		font-weight: $weight-normal;
+		
+		position: fixed;
+		width: 100vw;
 		left: 0;
-        bottom: 0;
-        z-index: 9980;
-    }
+		bottom: 0;
+		z-index: 9980;
+	}
 
 	.message-header {
 		justify-content: space-between;
@@ -76,33 +74,23 @@
 </style>
 
 {#if active}
-<div class="banner">
-	<article class="message {type} {size}" transition:fade|local>
-		{#if title || showClose}
-			<div class="message-header">
-				{#if title}
-					<p>{title}</p>
-				{/if}
-				{#if showClose}
-					<button
-						class="delete"
-						aria-label="ariaCloseLabel"
-						on:click={close} />
-				{/if}
-			</div>
-		{/if}
-		<section class="message-body">
-			<div class="media">
-				{#if icon}
-					<div class="media-left">
-						<Icon pack={iconPack} icon={newIcon} size={newIconSize} />
+	<div class="banner">
+		<article class="message {type} {size}" transition:fade|local>
+			<section class="message-body">
+				<div class="media">
+					{#if icon}
+						<div class="media-left">
+							<Icon
+								pack={iconPack}
+								icon={newIcon}
+								size={newIconSize} />
+						</div>
+					{/if}
+					<div class="media-content">
+						<slot />
 					</div>
-				{/if}
-				<div class="media-content">
-					<slot />
 				</div>
-			</div>
-		</section>
-	</article>
-    </div>
+			</section>
+		</article>
+	</div>
 {/if}

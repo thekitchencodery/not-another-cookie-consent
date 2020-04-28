@@ -7,6 +7,7 @@
 </script>
 
 <style lang="scss">
+@import 'node_modules/bulma/sass/utilities/all';
 	.nacc_fab {
 		bottom: 0;
 		left: 0;
@@ -19,7 +20,7 @@
 
 	.nacc_button {
 		clip-path: polygon(0px 0px, 0px 100%, 100% 100%);
-		background: hsla(0, 0%, 14%, 0.25);
+		background: bulmaRgba($black, 0.25);
 		color: white;
 		padding: 0;
 		margin: 0;
@@ -27,48 +28,49 @@
 		width: 2em;
 
 		&:hover {
-			background: hsl(0, 0%, 14%);
+			background: $black;
 		}
 	}
 	.is-primary {
-		background: hsla(171, 100%, 41%, 0.25);
+		background: bulmaRgba($primary, 0.25);
 		&:hover {
-			background: hsl(171, 100%, 41%);
+			background: $primary;
 		}
 	}
 
 	.is-info {
-		background: hsla(204, 86%, 53%, 0.25);
+		background: bulmaRgba($info, 0.25);
 		&:hover {
-			background: hsl(204, 86%, 53%);
+			background: $info;
 		}
 	}
 
 	.is-link {
-		background: hsla(217, 71%, 53%, 0.25);
+		background: bulmaRgba($link, 0.25);
 		&:hover {
-			background: hsl(217, 71%, 53%);
+			background: $link;
 		}
 	}
 
 	.is-success {
-		background: hsla(141, 71%, 48%, 0.25);
+		background: bulmaRgba($success, 0.25);
 		&:hover {
-			background: hsl(141, 71%, 48%);
+			background: $success;
 		}
 	}
 
 	.is-warning {
-		background: hsla(48, 100%, 67%, 0.25);
+		background: bulmaRgba($warning, 0.25);
 		&:hover {
-			background: hsl(48, 100%, 67%);
+			background: $warning;
 		}
 	}
 
 	.is-danger {
-		background: hsla(348, 100%, 61%, 0.25);
+		// background: hsla(348, 100%, 61%, 0.25);
+		background : bulmaRgba($danger, 0.25);
 		&:hover {
-			background: hsl(348, 100%, 61%);
+			background: $danger;
 		}
 	}
 </style>

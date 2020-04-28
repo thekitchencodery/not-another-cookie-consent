@@ -1,11 +1,11 @@
 <script>
-	import 'bulma/css/bulma.min.css';
 	import * as messages from './messages';
 	import { createEventDispatcher, onMount, tick } from 'svelte';
 	import Sidebar from './widgets/Sidebar.svelte';
 	import Fab from './widgets/Fab.svelte';
-	import { Button, Switch } from 'svelma';
+	import Button from './widgets/Button.svelte';
 	import Banner from './widgets/Banner.svelte';
+	import Switch from './widgets/Switch.svelte';
 	import { getCookie, setCookie } from './cookies';
 	const dispatch = createEventDispatcher();
 
@@ -22,14 +22,16 @@
 	let optionsText = {
 		title: optionPannel.title || messages.options_title,
 		preamble: optionPannel.preamble || messages.options_preamble,
-		aboutCookies: optionPannel.aboutLabel || messages.options_about_cookies_label,
-		cookiePolicy: optionPannel.policyLabel || messages.options_cookie_policy_label,
+		aboutCookies:
+			optionPannel.aboutLabel || messages.options_about_cookies_label,
+		cookiePolicy:
+			optionPannel.policyLabel || messages.options_cookie_policy_label,
 		saveButton: optionPannel.button || messages.options_save_button,
 		requiredHeadline: rOpts.title || messages.options_required_title,
-		requiredSlider : rOpts.label || messages.options_required_slider,
+		requiredSlider: rOpts.label || messages.options_required_slider,
 		required: rOpts.text || messages.options_required_text,
 		analyticsHeadline: aOpts.title || messages.options_analytics_title,
-		analyticsSlider : aOpts.label || messages.options_analytics_slider,
+		analyticsSlider: aOpts.label || messages.options_analytics_slider,
 		analytics: aOpts.text || messages.options_analytics_text,
 	};
 
@@ -37,7 +39,7 @@
 		headline: banner.headline || messages.banner_line1,
 		strapline: banner.strapline || messages.banner_line2,
 		optionsButton: banner.optionsButton || messages.banner_options,
-		acceptButton: banner.acceptButton || messages.banner_accept
+		acceptButton: banner.acceptButton || messages.banner_accept,
 	};
 
 	$: banner_show = false;
@@ -55,7 +57,11 @@
 	function save() {
 		sidebar_show = false;
 		fab_show = true;
-		cookie = setCookie(cookieName, { analytic: analytic }, analytic ? 365 : 1);
+		cookie = setCookie(
+			cookieName,
+			{ analytic: analytic },
+			analytic ? 365 : 1
+		);
 		dispatch('nacc_event', { text: 'Options Saved', analytic: analytic });
 	}
 
@@ -67,8 +73,11 @@
 	}
 
 	function accept() {
-		cookie = setCookie(cookieName, { analytic: true }, 365 );
-		dispatch('nacc_event', { text: 'Cookies Accepted', analytic: cookie.analytic });
+		cookie = setCookie(cookieName, { analytic: true }, 365);
+		dispatch('nacc_event', {
+			text: 'Cookies Accepted',
+			analytic: cookie.analytic,
+		});
 		banner_show = false;
 		fab_show = true;
 	}
@@ -80,7 +89,7 @@
 			throw 'You must set the cookie name';
 		}
 
-	    cookie = getCookie(cookieName);
+		cookie = getCookie(cookieName);
 
 		if (!cookie) {
 			analytic = false;
@@ -96,6 +105,23 @@
 </script>
 
 <style lang="scss">
+	@import 'node_modules/bulma/sass/utilities/all';
+	@import 'node_modules/bulma/sass/base/helpers';
+
+	@each $size in $sizes {
+		$i: index($sizes, $size);
+		.is-size-#{$i} {
+			font-size: $size !important;
+		}
+	}
+
+	@each $size in $sizes {
+		$i: index($sizes, $size);
+		.is-size-#{$i}-mobile {
+			font-size: $size !important;
+		}
+	}
+
 	.banner-content {
 		display: flex;
 		flex-direction: row;
@@ -108,12 +134,14 @@
 		min-width: 220px;
 		flex: 4 0 0;
 		margin-right: 1em;
+		p {
+			margin: 0;
+		}
 	}
 	.actions {
 		flex: 1 0 0;
 		display: inline-block;
 		white-space: nowrap;
-		
 	}
 
 	.has-margin-top {
@@ -129,12 +157,24 @@
 			justify-content: space-around;
 		}
 	}
+
+	a {
+		color: $link;
+		cursor: pointer;
+		text-decoration: none;
+		strong {
+			color: currentColor;
+		}
+		&:hover {
+			color: $link-hover;
+		}
+	}
 </style>
 
 <!-- Allow the exported props to be set externally -->
 <svelte:options accessors />
 
-<Fab bind:active={fab_show} theme={theme} on:click={showOptions} />
+<Fab bind:active={fab_show} {theme} on:click={showOptions} />
 
 <Sidebar
 	on:message
@@ -142,41 +182,45 @@
 	on:cancel={cancelled}
 	title={optionsText.title}>
 
-	<p class='is-size-6-mobile'>
-		{optionsText.preamble}
-	</p>
+	<p class="is-size-6-mobile">{optionsText.preamble}</p>
 
-	<h5 class="title is-size-6-mobile has-margin-top">{optionsText.requiredHeadline}</h5>
+	<h5 class="title is-size-6-mobile has-margin-top">
+		{optionsText.requiredHeadline}
+	</h5>
 	<div class="field">
-		<Switch checked={true} type="is-dark" disabled>{optionsText.requiredSlider}</Switch>
+		<Switch checked={true} type="is-dark" disabled>
+			{optionsText.requiredSlider}
+		</Switch>
 	</div>
-	<p class='is-size-7-mobile'>
-		{optionsText.required}
-	</p>
+	<p class="is-size-7-mobile">{optionsText.required}</p>
 
-	<h5 class="title is-size-6-mobile has-margin-top">{optionsText.analyticsHeadline}</h5>
+	<h5 class="title is-size-6-mobile has-margin-top">
+		{optionsText.analyticsHeadline}
+	</h5>
 	<div class="field">
-		<Switch bind:checked={analytic} type={theme}>{optionsText.analyticsSlider}</Switch>
+		<Switch bind:checked={analytic} type={theme}>
+			{optionsText.analyticsSlider}
+		</Switch>
 	</div>
-	<p class='is-size-7-mobile'>
-		{optionsText.analytics}
-	</p>
+	<p class="is-size-7-mobile">{optionsText.analytics}</p>
 
 	<div slot="footer">
 		<div class="has-text-centered">
-		<p class="is-size-7-mobile has-text-centered">
-		<a href={aboutCookies} target="_blank">{optionsText.aboutCookies}</a> | <a href={cookiePolicy}>{optionsText.cookiePolicy}</a>
-		</p>
-			<Button type={theme} on:click={save}>{optionsText.saveButton}</Button>
+			<p class="is-size-7-mobile has-text-centered">
+				<a href={aboutCookies} target="_blank">
+					{optionsText.aboutCookies}
+				</a>
+				|
+				<a href={cookiePolicy}>{optionsText.cookiePolicy}</a>
+			</p>
+			<Button type={theme} on:click={save}>
+				{optionsText.saveButton}
+			</Button>
 		</div>
 	</div>
 </Sidebar>
 
-<Banner
-	type={theme}
-	bind:active={banner_show}
-	icon="cookie-bite"
-	showClose={false}>
+<Banner type={theme} bind:active={banner_show} icon="cookie-bite">
 	<div class="banner-content">
 		<div class="bumpf">
 			<p>
@@ -192,7 +236,9 @@
 			<Button type={theme} outlined on:click={showOptions}>
 				{bannerText.optionsButton}
 			</Button>
-			<Button type={theme} on:click={accept}>{bannerText.acceptButton}</Button>
+			<Button type={theme} on:click={accept}>
+				{bannerText.acceptButton}
+			</Button>
 
 		</div>
 	</div>
